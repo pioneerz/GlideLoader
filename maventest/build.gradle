@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+bintray {
+    user = "zangdianbin"
+    key = "b966d198ea6aaf5744c618655c7f62c00b3935ec"
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'com.example.maventest'
+        vcsUrl = 'https://github.com/pioneerz/AOPAspectJ.git'
+        licenses = ['Apache-2.0']
+        version {
+            name = '1.0.0-Final'
+            desc = 'a powerful maven test'
+            released  = new Date()
+            vcsTag = 'v1.0.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.+'
+    testCompile 'junit:junit:4.12'
+}
